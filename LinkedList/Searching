@@ -1,0 +1,94 @@
+#include <iostream>
+using namespace std;
+
+class node{
+public:
+    int data;
+    node*next;
+
+    node(int d){
+        data = d;
+        next = NULL;
+
+    }
+};
+
+
+
+//Searching
+//Linear search is good as binary search takes 0(N)
+
+bool search(node*head, int key){
+
+    node*temp = head;
+    while(temp!=NULL){
+        if(head->data==key){
+            return true;
+        } 
+        head = head->next;
+    }
+     return false;
+}
+
+//RecursiveSearch
+bool recursiveSearch(node*head, int key){
+
+    if(head==NULL){
+        return false;
+    }
+
+    if(head->data==key){
+        return true;
+    }
+
+    else{
+       return recursiveSearch(head->next,key);
+    }
+}
+
+void print(node*head){
+
+    while(head!=NULL){
+        cout<<head->data;
+        cout<<"->";
+        head = head->next;
+    }
+}
+
+int main() {
+    node*head = NULL;
+    insertAtHead(head,5);
+    insertAtHead(head,2);
+    insertAtHead(head,1);
+    insertAtHead(head,0);
+    insertAtHead(head,-1);
+    insertAtMiddle(head,4,4);
+    insertAtTail(head,6);
+    insertAtTail(head,9);
+
+    deleteHead(head);
+    deleteTail(head);
+    deleteMiddle(head,4);
+
+
+    int key;
+    cin>>key;
+    if(search(head,key)){
+        cout<<"Element FOund";
+    } else {
+        cout<<"Not FOund";
+    }
+    
+    if(recursiveSearch(head,key)){
+        cout<<"Element FOund";
+    } else {
+        cout<<"Not FOund";
+    }
+        
+
+
+
+    print(head);
+    //print(head);
+    
+}
