@@ -71,7 +71,7 @@ istream& operator>>(istream &is, node*head){
 int main() {
     node*head;
     node*head2;
-    cin>>head;head2;
+    cin>>head>>head2;
     cout<<head<<head2;
     
 }
