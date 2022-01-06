@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+class node{
+public:
+    int data;
+    node*next;
+
+    node(int d){
+        data = d;
+        next = NULL;
+
+    }
+};
+
+void insertAtHead(node*&head,int d){
+    if(head==NULL){
+        head = new node(d);
+        return;
+    }
+
+    node *n = new node(d);
+    n->next = head;
+    head = n;
+}
+
+void print(node*head){
+
+    while(head!=NULL){
+        cout<<head->data;
+        cout<<"->";
+        head = head->next;
+    }
+}
+
+node* take_input(){
+    int d;
+    cin>>d;
+
+    node*head=NULL;
+    while(d!=-1){
+        insertAtHead(head,d);
+        cin>>d;
+    }
+    return head;
+}
+
+ostream& operator<<(ostream &os, node*head){
+    print(head);
+    return os;
+}
+
+istream& operator>>(istream &is, node*head){
+    head = take_input();
+    return is;
+}
+
+void reverse(node*&head){
+    node*prev = NULL;
+    node*current = head;
+    node*N;
+
+    while(current!=NULL){
+        //Save next node
+        N = current->next;
+        //Current node to previous
+        current->next = prev;
+        //iterating
+        prev = current;
+        current = N;
+    }
+    head = prev;
+}
+
+int main() {
+    node*head;
+    //node*head2;
+    cin>>head;
+    cout<<head;
+    reverse(head);
+    cout<<head;
+    
+}
