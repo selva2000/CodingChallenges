@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class node{
@@ -13,6 +14,7 @@ public:
     }
 };
 
+
 void insertAtHead(node*&head,int d){
     if(head==NULL){
         head = new node(d);
@@ -24,15 +26,136 @@ void insertAtHead(node*&head,int d){
     head = n;
 }
 
-void print(node*head){
-
+int length(node*head){
+    int cnt=0;
     while(head!=NULL){
-        cout<<head->data;
-        cout<<"->";
+        cnt++;
         head = head->next;
+    }
+    return cnt;
+}
+
+void insertAtTail(node*&head,int d){
+    if(head==NULL){
+        // head = new node(d);
+        // return;
+        insertAtHead(head,d);
+    }
+
+    node*tail = head;
+    while(tail->next!=NULL){
+        tail = tail->next;
+    }
+    tail->next = new node(d);
+    return;
+}
+
+void insertAtMiddle(node*&head,int d,int p){
+    if(head==NULL or p==0){
+        insertAtHead(head,d);
+    }
+    else if(p>length(head)){
+        insertAtTail(head,d);
+    }
+    else {
+        int jumps = 0;
+        node*temp = head;
+        while(jumps<p-1){
+            temp = temp->next;
+            jumps++;
+        }
+        node*n = new node(d);
+        n->next = temp->next;
+        temp->next = n;
+    }
+
+}
+
+void deleteHead(node*&head){
+    if(head==NULL){
+        return;
+    }
+    node*temp = head->next;
+    delete head;
+    head = temp;
+}
+
+void deleteTail(node*&head){
+    if(head==NULL){
+        return;
+    }
+
+    node*tail=head;
+    node*prev=head;
+
+    while(tail->next!=NULL){
+        tail = tail->next;
+    }
+
+    while(prev->next->next!=NULL){
+        prev = prev->next;
+    }
+
+    delete tail;
+    prev->next = NULL;
+}
+
+void deleteMiddle(node*&head,int p){
+    while(head==NULL){
+        return;
+    }
+
+    node*prev = head;
+    node*target = head;
+    int j=0;
+    while(j<p-1){
+        prev = prev->next;
+        j++;
+    }
+    int k=0;
+    while(k<p){
+        target = target->next;
+        k++;
+    }
+
+    prev->next = target->next;
+    delete target;
+
+}
+
+
+//Searching
+//Linear search is good as binary search takes 0(N)
+
+bool search(node*head, int key){
+
+    node*temp = head;
+    while(temp!=NULL){
+        if(head->data==key){
+            return true;
+        }
+        head = head->next;
+    }
+     return false;
+}
+
+//RecursiveSearch
+bool recursiveSearch(node*head, int key){
+
+    if(head==NULL){
+        return false;
+    }
+
+    if(head->data==key){
+        return true;
+    }
+
+    else{
+       return recursiveSearch(head->next,key);
     }
 }
 
+//Take input
 node* take_input(){
     int d;
     cin>>d;
@@ -41,16 +164,27 @@ node* take_input(){
     while(d!=-1){
         insertAtHead(head,d);
         cin>>d;
+
     }
     return head;
 }
 
+
+
+void print(node*&head){
+
+    while(head!=NULL){
+        cout<<head->data;
+        cout<<"->";
+        head = head->next;
+    }
+}
 ostream& operator<<(ostream &os, node*head){
     print(head);
     return os;
 }
 
-istream& operator>>(istream &is, node*head){
+istream& operator>>(istream &is, node*&head){
     head = take_input();
     return is;
 }
@@ -72,12 +206,57 @@ void reverse(node*&head){
     head = prev;
 }
 
+
+
 int main() {
+     //node*head = take_input();
+      //node*head =NULL;
+    //print(head);
+    //insertAtHead(head,5);
+    //insertAtHead(head,2);
+     /*insertAtHead(head,1);
+    insertAtHead(head,0);
+    insertAtHead(head,-1);
+    insertAtMiddle(head,4,4);
+    insertAtTail(head,6);
+    insertAtTail(head,9);
+
+    deleteHead(head);
+     deleteTail(head);
+    deleteMiddle(head,4);*/
+
+
+    // int key;
+    // cin>>key;
+    // if(search(head,key)){
+    //     cout<<"Element FOund";
+    // } else {
+    //     cout<<"Not FOund";
+    // }
+
+    // if(recursiveSearch(head,key)){
+    //     cout<<"Element FOund";
+    // } else {
+    //     cout<<"Not FOund";
+    // }
+
+
+
+
+    //print(head);
+
+    //node*head=take_input();
+    //node*head2=take_input();
     node*head;
-    //node*head2;
     cin>>head;
     cout<<head;
     reverse(head);
-    cout<<head;
-    
+    cout<<endl;
+    cout<<head<<endl;
+  
+   //cout<<head2;
+
+
+
+
 }
