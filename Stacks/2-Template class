@@ -1,0 +1,77 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+//Class template - generalize the stack for different datatypes
+//we can make string,char and int as our class template for our stack using template
+
+//template<typename T,typename U>
+template<typename T>
+class Stack{
+
+    private:  
+        vector<T> v;
+        //vector<U> v2;
+
+    public:
+        void push(T data){
+            v.push_back(data);
+        }
+
+        bool empty(){
+            return v.size()==0;
+        }
+
+
+        void pop(){
+            if(!empty()){
+                 v.pop_back();
+                 
+            }  
+        }
+
+          T top(){
+            return v[v.size()-1];
+        }
+
+        //  void pop1(){
+        //     if(!empty()){
+
+        //          v2.pop_back();
+        //     }  
+        // }
+
+      
+
+        // U top1(){
+        //     return v2[v2.size()-1];
+        // }
+
+    
+};
+
+int main() {
+    
+    //In template class, u need to specify datatype when we refrencing from obj.
+    //Stack<int, char> s;
+    Stack<int> s;
+    for(int i=1;i<5;i++){
+        s.push(i);
+    }
+
+    // for(int i=65;i<70;i++){
+    //     s.push1(i);
+    // }
+
+     
+
+    while(!s.empty()){
+        cout<<s.top()<<endl;
+        s.pop();
+    }
+    
+    //  while(!s.empty1()){
+    //      cout<<s.top()<<endl;
+    //     s.pop1();
+    // }
+}
