@@ -1,0 +1,67 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+
+
+template<typename T>
+
+class Queue{
+
+    stack<T> s1;
+    stack<T> s2;
+
+public:
+
+    void push(T data){
+
+        s1.push(data);
+
+    }
+
+    T pop(){
+
+        if(s1.empty() and s2.empty()){
+            return 0;
+        }
+
+        if(s2.empty()){
+
+            while(!s1.empty()){
+                T element = s1.top();
+                s2.push(element);
+                s1.pop();
+            }
+        }
+
+        T temp = s2.top();
+        s2.pop();
+        return temp;
+
+
+
+    }
+
+    bool empty(){
+        return s1.size()==0 and s2.size()==0;
+    }
+
+};
+
+
+
+int main(){
+
+    Queue<int> q;
+
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+
+     cout<<q.pop()<<endl;
+     cout<<q.pop()<<endl;
+     cout<<q.pop()<<endl;
+     cout<<q.pop()<<endl;
+
+    return 0;
+}
