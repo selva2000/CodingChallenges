@@ -32,7 +32,7 @@ node* buildTree(){
 	return root;
 }
 
-void print(node* root){
+void print(node* root){//preorder: (N L R)
 
 	if(root==NULL){
 		return;
@@ -45,7 +45,7 @@ void print(node* root){
 
 }
 
-void print_inorder(node* root){
+void print_inorder(node* root){//Inorder: (L N R)
 
 	if(root==NULL){
 		return;
@@ -56,7 +56,7 @@ void print_inorder(node* root){
 	print_inorder(root->right);
 }
 
-void print_postorder(node* root){
+void print_postorder(node* root){//Post order: (L R N)
 
 	if(root==NULL){
 		return;
@@ -72,11 +72,14 @@ void print_postorder(node* root){
 int main(){
 
 	node* root = buildTree();
+	cout<<"Preorder Traversal: ";
 	print(root);
 	cout<<endl;
 
+	cout<<"Inorder Traversal: ";
 	print_inorder(root);
 	cout<<endl;
 
+	cout<<"Postorder Traversal: ";
 	print_postorder(root);
 }
