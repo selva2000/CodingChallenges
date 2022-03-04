@@ -9,7 +9,7 @@ public:
 	int data;
 	node* left;
 	node* right;
- 
+
 	node(int d){
 		data = d;
 		left = NULL;
@@ -114,30 +114,40 @@ void bfs(node* root){
 	queue<node*> q; 
 	//node - used because i need 1st element(8) of the queue. 
 	//node* - used to get address instead copying the data.
-	//we did'nt used queue<int> bcoz we know the 1st element(8) but we don't know where 8 is stored.
+	//we did'nt used queue<int> bcoz we know the 1st element is int(8) but we don't know where 8 is stored.
 
 	q.push(root);
 	// initially 8
 	//Why we are pushing before while loop, bcoz we don't want our queue to be empty.
-
+	q.push(NULL);
+	//Immediately adding NULL..
 
 	while(!q.empty()){
 
 		//Getting front element to store
 		node* front = q.front(); // intially front = 8
-		cout<<front->data<< " ";
+		if(front==NULL){
+			cout<<endl; //making new line for each level order
+			q.pop();    //poping out NULL.
+			if(!q.empty()){
+				q.push(NULL); //Adding NULL after the addition of children
+			}
+		}
+		else{
+			cout<<front->data<< ",";
 
 		//Poping it
-		q.pop();
+			q.pop();
 
 		//Pushing it childrens if it exist
 
-		if(front->left!=NULL){
-			q.push(front->left);
-		}
+			if(front->left!=NULL){
+				q.push(front->left);
+			}
 
-		if(front->right!=NULL){
-			q.push(front->right);
+			if(front->right!=NULL){
+				q.push(front->right);
+			}
 		}
 
 	}
@@ -174,4 +184,3 @@ int main(){
 	cout<<"BFS - O(N) (using queue) : "<<endl;
 	bfs(root);
 }
-
