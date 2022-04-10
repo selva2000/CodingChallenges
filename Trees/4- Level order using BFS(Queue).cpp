@@ -114,7 +114,9 @@ void bfs(node* root){
 	queue<node*> q; 
 	//node - used because i need 1st element(8) of the queue. 
 	//node* - used to get address instead copying the data.
-	//we did'nt used queue<int> bcoz we know the 1st element is int(8) but we don't know where 8 is stored.
+	
+	//we did'nt used queue<int> Even though we know the 1st element is int(8), but we need node* to get the address so we can use it to get children of the node.
+	
 
 	q.push(root);
 	// initially 8
