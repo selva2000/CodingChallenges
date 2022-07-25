@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+char keypad[][10] = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; 
+
+void generate_names(char *in, char *out, int i, int j){
+
+	/*map<int, string>mp;
+
+	mp[0] = " ";
+	mp[1] = " ";
+	mp[2] = "abc";	
+	mp[3] = "def";
+	mp[4] = "ghi";
+	mp[5] = "jkl";
+	mp[6] = "mno";
+	mp[7] = "pqrs";
+	mp[8] = "tuv";
+	mp[9] = "wxyz";*/
+
+	//cout<<mp.at(2);
+	//cout<<mp[2];
+
+	//base case
+	if(in[i] == '\0'){
+		out[j] = '\0';
+		cout<<out<<endl;
+		return;
+	}
+
+	//rec case
+	int digit = in[i] - '0';
+	
+	if(digit == 0 || digit == 1){
+		generate_names(in, out, i+1, j);
+	}
+
+	for(int k=0; keypad[digit][k] != '\0'; k++){
+
+		out[j] = keypad[digit][k];
+
+		//remaing slots aof output array
+		generate_names(in, out, i+1, j+1);
+	}
+	return;
+
+}
+
+
+int main(){
+
+	char input[100];
+	cin>>input;
+
+	char output[100];
+	// int keypad_val[100] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	// string values[100] = {'', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'};
+
+	generate_names(input, output, 0, 0);
+}
