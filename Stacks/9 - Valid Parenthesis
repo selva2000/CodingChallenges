@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+
+        for(auto ele: s){
+
+            if(ele == '(' || ele == '{' || ele == '['){
+                st.push(ele);
+            }else{
+                if(st.size() == 0) return false;
+                char toppie = st.top();
+                st.pop();
+                if(toppie == '(' && ele == ')' || toppie == '[' && ele == ']' || toppie == '{' && ele == '}'){
+                    continue;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return st.empty();
+        
+    }
+};
